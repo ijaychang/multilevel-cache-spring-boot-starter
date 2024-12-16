@@ -82,6 +82,8 @@ public class MultilevelCacheAutoConfiguration {
 
 		// Validator验证类用于验证是否能够被反序列化,DefaultTyping指定序列化输入的类型，类必须是非final修饰的，final修饰的类，比如String,Integer等会跑出异常
 		objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+
+		// 注册 org.springframework.cache.support.NullValue 自定义的序列化，反序列化处理
 		SimpleModule nullValueSimpleModule = new SimpleModule();
 		nullValueSimpleModule.addSerializer(NullValue.class, NullValueSerializer.INSTANCE);
 		nullValueSimpleModule.addDeserializer(NullValue.class, NullValueDeserializer.INSTANCE);
